@@ -56,6 +56,9 @@
 		05E3A778261C66D400DC1E29 /* versi-app */ = {
 			isa = PBXGroup;
 			children = (
+				05E3A790261C672700DC1E29 /* Model */,
+				05E3A78F261C672200DC1E29 /* View */,
+				05E3A791261C672C00DC1E29 /* Controller */,
 				05E3A779261C66D400DC1E29 /* AppDelegate.swift */,
 				05E3A77B261C66D400DC1E29 /* SceneDelegate.swift */,
 				05E3A77D261C66D400DC1E29 /* ViewController.swift */,
@@ -65,6 +68,27 @@
 				05E3A787261C66D400DC1E29 /* Info.plist */,
 			);
 			path = "versi-app";
+			sourceTree = "<group>";
+		};
+		05E3A78F261C672200DC1E29 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		05E3A790261C672700DC1E29 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		05E3A791261C672C00DC1E29 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -296,7 +320,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.maksimPonomarev.versi-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -315,7 +339,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.maksimPonomarev.versi-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
