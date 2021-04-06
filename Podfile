@@ -6,5 +6,9 @@ target 'versi-app' do
   use_frameworks!
 
   # Pods for versi-app
+  pod 'RxSwift'
+  pod 'RxCocoa'
+  pod 'Alamofire'
+  pod 'AlamofireImage'
 
 end
