@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Foundation
+//import Foundation
 
 class TrendingRepoCell: UITableViewCell {
 
@@ -19,7 +19,7 @@ class TrendingRepoCell: UITableViewCell {
     @IBOutlet weak var repoViewReadmeBtn: RoundedButton!
     @IBOutlet weak var backView: UIView!
     
-    private var repoUrl: String?
+     var repoUrl: String?
     
     func configureCell(repo: Repo) {
         self.repoName.text = repo.name
@@ -28,7 +28,7 @@ class TrendingRepoCell: UITableViewCell {
         self.repoNumberOfForks.text = String(describing: repo.numberOfForks)
         self.repoLanguage.text = repo.language
         self.repoNumberOfContributors.text = String(describing: repo.numberOfContributors)
-        
+        print("configureCell - done")
         
     }
     

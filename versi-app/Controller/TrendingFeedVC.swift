@@ -8,22 +8,43 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Alamofire
 
 class TrendingFeedVC: UIViewController /*, UITableViewDelegate, UITableViewDataSource*/ {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var disposeBag = DisposeBag()
     var dataSource = PublishSubject<[Repo]>()
+    var disposeBag = DisposeBag()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchData()
-        dataSource.bind(to: tableView.rx.items(cellIdentifier: "trendingRepoCell")) { (row, repo: Repo, cell: TrendingRepoCell) in
-            cell.configureCell(repo: repo)
-        }
-        .disposed(by: disposeBag)
         
+        fetchData()
+        print("fetchData - passed")
+        
+        dataSource.bind(to: tableView.rx.items(cellIdentifier: "trendingRepoCell")) { (row, repo: Repo, cell: TrendingRepoCell) in
+            
+            cell.configureCell(repo: repo)
+        }.disposed(by: disposeBag)
+        //tableView.reloadData()
+    }
+    
+    func fetchData() {
+        DownloadService.instance.downloadTrendingRepos { (trendingRepoArray) in
+            print("fetchData - done", trendingRepoArray.count)
+            self.dataSource.onNext(trendingRepoArray)
+           
+        }
+    }
+}
+        
+
+
+
+
+
 //        tableView.delegate = self
 //        tableView.dataSource = self
 //        tableView.reloadData()
@@ -38,13 +59,7 @@ class TrendingFeedVC: UIViewController /*, UITableViewDelegate, UITableViewDataS
 //            print("\n \n \n",reposArray.count)
 //        }
         
-    }
     
-    func fetchData() {
-        DownloadService.instance.downloadTrendingRepos { (trendingRepoArray) in
-            self.dataSource.onNext(trendingRepoArray)
-        }
-    }
 
 //    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 //        return 2
@@ -56,7 +71,5 @@ class TrendingFeedVC: UIViewController /*, UITableViewDelegate, UITableViewDataS
 //        cell.configureCell(repo: repo)
 //        return cell
 //    }
-    
 
-}
 
