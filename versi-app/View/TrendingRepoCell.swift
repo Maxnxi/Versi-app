@@ -7,9 +7,13 @@
 
 import UIKit
 //import Foundation
+import RxSwift
+import RxCocoa
 
 class TrendingRepoCell: UITableViewCell {
 
+    var disposeBag = DisposeBag()
+    
     @IBOutlet weak var repoName: UILabel!
     @IBOutlet weak var repoDescriptionLbl: UILabel!
     @IBOutlet weak var repoImageView: UIImageView!
@@ -19,8 +23,8 @@ class TrendingRepoCell: UITableViewCell {
     @IBOutlet weak var repoViewReadmeBtn: RoundedButton!
     @IBOutlet weak var backView: UIView!
     
-     var repoUrl: String?
-    
+    private var repoUrl: String?
+
     func configureCell(repo: Repo) {
         self.repoName.text = repo.name
         self.repoDescriptionLbl.text = repo.description
@@ -28,8 +32,12 @@ class TrendingRepoCell: UITableViewCell {
         self.repoNumberOfForks.text = String(describing: repo.numberOfForks)
         self.repoLanguage.text = repo.language
         self.repoNumberOfContributors.text = String(describing: repo.numberOfContributors)
+        repoUrl = repo.repoUrl
         print("configureCell - done")
         
+        repoViewReadmeBtn.rx.tap.subscribe(onNext: {
+            self.window?.rootViewController?.presentSFSafariVCFor(url: self.repoUrl!)
+        }).disposed(by: disposeBag)
     }
     
     override func layoutSubviews() {

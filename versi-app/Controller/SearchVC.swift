@@ -10,7 +10,7 @@ import RxCocoa
 import RxSwift
 import Alamofire
 
-class SearchVC: UIViewController {
+class SearchVC: UIViewController, UITableViewDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var searchField: RoundedBorderTxtField!
     @IBOutlet weak var tableView: UITableView!
@@ -20,6 +20,7 @@ class SearchVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bindSearchField()
+        tableView.rx.setDelegate(self).disposed(by: disposeBag)
         
     }
     
@@ -63,7 +64,21 @@ class SearchVC: UIViewController {
             .disposed(by: disposeBag)
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) as? SearchCell else { return }
+        //print(cell.repoUrl)
+        let url = cell.repoUrl!
+        self.presentSFSafariVCFor(url: url)
+    }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        view.endEditing(true)
+        return true
+    }
 
 }
 

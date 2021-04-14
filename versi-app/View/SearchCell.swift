@@ -16,7 +16,7 @@ class SearchCell: UITableViewCell {
     @IBOutlet weak var repoForksCountLabel: UILabel!
     @IBOutlet weak var repoLanguageLbl: UILabel!
     
-    private var repoUrl: String?
+    public private(set) var repoUrl: String?
     
     
     func configureCell(repo: Repo) {
